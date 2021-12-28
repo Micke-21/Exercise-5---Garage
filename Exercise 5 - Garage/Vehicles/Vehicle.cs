@@ -19,8 +19,11 @@ namespace Exercise_5___Garage.Vehicles
             get => regNo;
             set
             {
+
                 //if (IsRegNoFound(value))
                 //    throw new ArgumentException("Reg no already exists");
+                if (value == null)
+                    throw new ArgumentNullException("Reg no already exists");
                 regNo = value.ToUpper();
             }
         }

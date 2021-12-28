@@ -18,6 +18,10 @@ namespace Exercise_5___Garage
         void SeedVehicles();
     }
 
+    /// <summary>
+    /// Interface Trying to get the <T> to work!
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IGarage2<T>
     {
         int Capacity { get;/* set;*/ }

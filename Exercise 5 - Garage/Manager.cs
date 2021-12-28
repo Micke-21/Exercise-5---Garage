@@ -26,7 +26,9 @@ namespace Exercise_5___Garage
                             gh.CreatGarage();
                             break;
                         case "2":
-
+                            string stringInput = ui.GetStringInput("How many parkingplaces should the garage have? ");
+                            int capacity = int.TryParse(stringInput, out capacity)?capacity:0;
+                            gh.CreatGarage(capacity);
                             break;
 
                         case "q":
@@ -54,7 +56,7 @@ namespace Exercise_5___Garage
 
                         //Console.WriteLine("2. List vehicle types.");
                         case "2":
-                            var vehicleTypes = gh.GetVehicleTypes();
+                            var vehicleTypes = gh.GetVehicleTypes_2();
                             ui.PrintString(vehicleTypes);
 
                             ui.GetKey("\nPress a key to continue.");
@@ -98,7 +100,7 @@ namespace Exercise_5___Garage
                         case "5":
                             regno = ui.GetStringInput("Enter Reg no to find");
 
-                            var vehicle = gh.GetVehicle(regno);
+                            var vehicle = gh.GetVehicle_2(regno);
                             ui.PrintVehicle(vehicle);
                             ui.GetKey("\nPress a key to continue.");
                             break;

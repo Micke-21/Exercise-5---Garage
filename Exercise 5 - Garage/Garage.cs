@@ -118,11 +118,13 @@ namespace Exercise_5___Garage
         #region SeedVehicles
         public void SeedVehicles()
         {
-            var seedMethode = 1;
+            var seedMethode = 2;
 
+            //ToDo SeedVehicles Index out of range if capacity < see down
             if (seedMethode == 1)  // Kan få Null värden mitt i listan
             {
-                vehicles[0] = new Vehicle() { Color = "Green", RegNo = "ABC123" };
+                
+                vehicles[0] = new Vehicle() { Make = "SAAB", Model = "V4", NoOfWheel = 4, Color = "Green", RegNo = "ABC123" };
                 vehicles[1] = new Vehicle() { Color = "Blue", RegNo = "MLB061" };
                 //vehicles[2] = new Vehicle() { Color = "Blue", RegNo = "MLB061" };
                 //vehicles[2] = new Vehicle() { Color = "Blue", RegNo = "MLB062" };
@@ -137,7 +139,7 @@ namespace Exercise_5___Garage
             if (seedMethode == 2) // ev null i slutet av listan (fyller på från början av arrayen)
             {
                 Vehicle[] seedVehicles = {
-                    new Vehicle() { Color = "Green", RegNo = "ABC123" },
+                    new Vehicle() { Make = "SAAB", Model = "V4", NoOfWheel = 4, Color = "Green", RegNo = "ABC123" },
                     new Vehicle() { Color = "Blue", RegNo = "MLB061" },
                     //new Vehicle() { Color = "Blue", RegNo = "MLB061" },
                     //new Vehicle() { Color = "Blue", RegNo = "MLB062" },
@@ -149,16 +151,19 @@ namespace Exercise_5___Garage
                     new Motorcycle() { Make = "Honda", Model = "CB-125", Color = "Blue", RegNo = "MC406", NoOfWheel = 2, CylinderVolume = 125 }
                 };
 
+                //ToDo SeedVehicles Index out of range if capacity < see down
                 var i = 0;
                 foreach (var vehicle in seedVehicles)
                 {
+                    if (i >= Capacity)
+                        break;
                     vehicles[i++] = vehicle;
                 }
             }
 
             if (seedMethode == 3)// Using the addmethode
             {
-                AddVehicle(new Vehicle() { Color = "Green", RegNo = "ABC123" });
+                AddVehicle(new Vehicle() { Make = "SAAB", Model = "V4", NoOfWheel = 4, Color = "Green", RegNo = "ABC123" });
                 AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB061" });
                 //AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB061" });
                 //AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB062" });

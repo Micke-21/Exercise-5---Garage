@@ -9,7 +9,7 @@ namespace Exercise_5___Garage
         void CreatGarage();
         bool GarageIsCreated();
         Vehicle[] GetAllVehicles();
-        Vehicle GetVehicle(string regNo);
+        Vehicle? GetVehicle(string regNo);
         string GetVehicleTypes();
         bool IsGarageFull();
         bool RemoveVehicle(string regNo);

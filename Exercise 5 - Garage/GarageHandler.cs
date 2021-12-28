@@ -8,7 +8,19 @@ namespace Exercise_5___Garage
         private IGarage<Vehicle> garage;
 
 
+        public GarageHandler()
+        {
+
+        }
         public void CreatGarage()
+        {
+            //garage = new Garage<Vehicle>(capacity);
+            //garage.SeedVehicles();
+
+            CreatGarage(capacity);
+        }
+
+        public void CreatGarage(int capacity)
         {
             garage = new Garage<Vehicle>(capacity);
             garage.SeedVehicles();
@@ -24,14 +36,38 @@ namespace Exercise_5___Garage
             return garage.GetAllVehicle();
         }
 
-        public Vehicle GetVehicle(string regNo)
+        public Vehicle? GetVehicle(string regNo)
         {
             return garage.GetVehicleByRegNo(regNo);
+        }
+
+        public Vehicle? GetVehicle_2(string regNo)
+        {
+            if (regNo == null)
+                throw new ArgumentNullException("Reg no can't be null.");
+            var vehicles = garage.GetAllVehicle();
+            var vehicle = vehicles.Where(v => v.RegNo == regNo.ToUpper()).FirstOrDefault();
+
+            return vehicle;
         }
 
         public string GetVehicleTypes()
         {
             return garage.GetVehicleTypes();
+        }
+
+        public string GetVehicleTypes_2()
+        {
+            var vehicles = garage.GetAllVehicle();
+            string vehicleTypes = "";
+
+            foreach (var item in vehicles)
+            {
+                vehicleTypes += item != null ? item.GetType().Name : "* Null *";
+                vehicleTypes += "\n";
+            }
+
+            return vehicleTypes;
         }
 
         public bool GarageIsCreated()
@@ -70,7 +106,7 @@ namespace Exercise_5___Garage
             var newCar = new Car();
             var newMotorcycle = new Motorcycle();
 
-            var regNo = ui.GetStringInput("Enter Reg no: ");
+            string? regNo = ui.GetStringInput("Enter Reg no: ");
             var make = ui.GetStringInput("Enter Make: ");
             var model = ui.GetStringInput("Enter Model: ");
             var color = ui.GetStringInput("Enter Color: ");
@@ -98,6 +134,7 @@ namespace Exercise_5___Garage
 
                     var wingspan = ui.GetStringInput("Enter WingSpan: ");
                     var noEngines = ui.GetStringInput("Enter No of Engines: ");
+                    var test = decimal.Parse(wingspan);
                     newAirplane.WingSpan = decimal.TryParse(wingspan, out decimal w) ? w : 0;
                     newAirplane.NumberOfEngines = int.TryParse(noEngines, out int noe) ? noe : 0;
 

@@ -13,6 +13,7 @@ namespace Exercise_5___Garage
         {
             Console.WriteLine("Menu\n");
             Console.WriteLine("1. Set up Garage");
+            Console.WriteLine("2. Set up Garage enter capacity");
 
             Console.WriteLine("Q. Quit");
         }
