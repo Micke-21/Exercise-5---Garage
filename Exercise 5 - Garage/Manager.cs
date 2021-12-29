@@ -26,7 +26,7 @@ namespace Exercise_5___Garage
                             gh.CreatGarage();
                             break;
                         case "2":
-                            string stringInput = ui.GetStringInput("How many parkingplaces should the garage have? ");
+                            string? stringInput = ui.GetStringInput("How many parkingplaces should the garage have? ");
                             int capacity = int.TryParse(stringInput, out capacity)?capacity:0;
                             gh.CreatGarage(capacity);
                             break;
@@ -44,7 +44,7 @@ namespace Exercise_5___Garage
                     ui.ShowMenu();
 
                     var choice = ui.GetMenuChoice();
-                    string regno;
+                    string? regno;
 
                     switch (choice)
                     {
@@ -75,7 +75,7 @@ namespace Exercise_5___Garage
                                 ui.ChoseVehicleToAdd();
                                 choice = ui.GetMenuChoice();
 
-                                if (gh.AddVehicle(ui, choice))
+                                if (gh.AddVehicle(ui, choice!))
                                     ui.PrintString("Vehicle added.");
                                 else
                                     ui.PrintString("Vehcile not added");
@@ -87,7 +87,7 @@ namespace Exercise_5___Garage
                         //Console.WriteLine("4. Remove vehicle");
                         case "4":
                             regno = ui.GetStringInput("Enter Reg no to remove");
-                            if (gh.RemoveVehicle(regno))
+                            if (gh.RemoveVehicle(regno!))
                                 ui.PrintString("Vehicle removed.");
                             else
                                 ui.PrintString("Vehcile not removed");

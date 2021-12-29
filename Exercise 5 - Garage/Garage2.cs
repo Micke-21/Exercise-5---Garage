@@ -126,7 +126,7 @@ namespace Exercise_5___Garage
         #region SeedVehicles
         public void SeedVehicles()
         {
-            var seedMethode = 1;
+            //var seedMethode = 1;
 
             //if (seedMethode == 1)  // Kan få Null värden mitt i listan
             //{

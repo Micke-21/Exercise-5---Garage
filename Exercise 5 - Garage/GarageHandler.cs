@@ -4,7 +4,7 @@ namespace Exercise_5___Garage
 {
     public class GarageHandler : IGarageHandler
     {
-        private int capacity = 9;
+        private readonly int capacity = 9;
         private IGarage<Vehicle> garage;
 
 
@@ -12,11 +12,9 @@ namespace Exercise_5___Garage
         {
 
         }
+
         public void CreatGarage()
         {
-            //garage = new Garage<Vehicle>(capacity);
-            //garage.SeedVehicles();
-
             CreatGarage(capacity);
         }
 
@@ -28,7 +26,7 @@ namespace Exercise_5___Garage
 
         public bool IsGarageFull()
         {
-            var g = garage.IsFull;
+            //var g = garage.IsFull;
             return garage.IsFull;
         }
         public Vehicle[] GetAllVehicles()
@@ -43,8 +41,9 @@ namespace Exercise_5___Garage
 
         public Vehicle? GetVehicle_2(string regNo)
         {
-            if (regNo == null)
-                throw new ArgumentNullException("Reg no can't be null.");
+            //if (string.IsNullOrWhiteSpace(regNo))
+            if (regNo is null)
+                throw new ArgumentNullException(nameof(regNo),"Reg no can't be null.");
             var vehicles = garage.GetAllVehicle();
             var vehicle = vehicles.Where(v => v.RegNo == regNo.ToUpper()).FirstOrDefault();
 
@@ -72,7 +71,7 @@ namespace Exercise_5___Garage
 
         public bool GarageIsCreated()
         {
-            return garage != null ? true : false;
+            return garage != null;
         }
 
         public bool RemoveVehicle(string regNo)
@@ -86,7 +85,7 @@ namespace Exercise_5___Garage
         /// <returns>True if Vehicle is added</returns>
         public bool AddVehicle()
         {
-            var newVehicle = new Car { RegNo = "DEF123", Color = "Color", Make = "Test", Fueltype = "E85", Model = "T1", NoOfWheel = 6 };
+            var newVehicle = new Car("DEF123") { /*RegNo = "DEF123",*/ Color = "Color", Make = "Test", Fueltype = "E85", Model = "T1", NoOfWheel = 6 };
 
             return garage.AddVehicle(newVehicle);
         }
@@ -99,14 +98,14 @@ namespace Exercise_5___Garage
         /// <returns></returns>
         public bool AddVehicle(IUI ui, string choice)
         {
-            var newVehicle = new Vehicle();
-            var newAirplane = new Airplane();
-            var newBoat = new Boat();
-            var newBus = new Bus();
-            var newCar = new Car();
-            var newMotorcycle = new Motorcycle();
-
             string? regNo = ui.GetStringInput("Enter Reg no: ");
+            var newVehicle = new Vehicle(regNo);
+            var newAirplane = new Airplane(regNo);
+            var newBoat = new Boat(regNo);
+            var newBus = new Bus(regNo);
+            var newCar = new Car(regNo);
+            var newMotorcycle = new Motorcycle(regNo);
+
             var make = ui.GetStringInput("Enter Make: ");
             var model = ui.GetStringInput("Enter Model: ");
             var color = ui.GetStringInput("Enter Color: ");
@@ -117,7 +116,7 @@ namespace Exercise_5___Garage
             switch (choice)
             {
                 case "1":
-                    newVehicle.RegNo = regNo;
+                    //newVehicle.RegNo = regNo;
                     newVehicle.Make = make;
                     newVehicle.Model = model;
                     newVehicle.Color = color;
@@ -126,7 +125,7 @@ namespace Exercise_5___Garage
                     result = garage.AddVehicle(newVehicle);
                     break;
                 case "2": //Airplane
-                    newAirplane.RegNo = regNo;
+                    //newAirplane.RegNo = regNo;
                     newAirplane.Make = make;
                     newAirplane.Model = model;
                     newAirplane.Color = color;
@@ -134,14 +133,14 @@ namespace Exercise_5___Garage
 
                     var wingspan = ui.GetStringInput("Enter WingSpan: ");
                     var noEngines = ui.GetStringInput("Enter No of Engines: ");
-                    var test = decimal.Parse(wingspan);
+                    //var test = decimal.Parse(wingspan);
                     newAirplane.WingSpan = decimal.TryParse(wingspan, out decimal w) ? w : 0;
                     newAirplane.NumberOfEngines = int.TryParse(noEngines, out int noe) ? noe : 0;
 
                     result = garage.AddVehicle(newAirplane);
                     break;
                 case "3": //Boat
-                    newBoat.RegNo = regNo;
+                    //newBoat.RegNo = regNo;
                     newBoat.Make = make;
                     newBoat.Model = model;
                     newBoat.Color = color;
@@ -153,7 +152,7 @@ namespace Exercise_5___Garage
                     result = garage.AddVehicle(newBoat);
                     break;
                 case "4": //Bus
-                    newBus.RegNo = regNo;
+                    //newBus.RegNo = regNo;
                     newBus.Make = make;
                     newBus.Model = model;
                     newBus.Color = color;
@@ -165,7 +164,7 @@ namespace Exercise_5___Garage
                     result = garage.AddVehicle(newBus);
                     break;
                 case "5": //Car
-                    newCar.RegNo = regNo;
+                    //newCar.RegNo = regNo;
                     newCar.Make = make;
                     newCar.Model = model;
                     newCar.Color = color;
@@ -177,7 +176,7 @@ namespace Exercise_5___Garage
                     result = garage.AddVehicle(newCar);
                     break;
                 case "6": //Motorcycle
-                    newMotorcycle.RegNo = regNo;
+                    //newMotorcycle.RegNo = regNo;
                     newMotorcycle.Make = make;
                     newMotorcycle.Model = model;
                     newMotorcycle.Color = color;
@@ -210,7 +209,7 @@ namespace Exercise_5___Garage
             else
                 Console.WriteLine($"Regno {regno} finns ej");
 
-            var isFullText = garage.IsFull ? "Yes" : "No";
+            //var isFullText = garage.IsFull ? "Yes" : "No";
             Console.WriteLine($"Garage is  {(garage.IsFull ? "full" : "not full")}");
 
             Console.WriteLine($"Qapacity {garage.Capacity} Free Places {garage.FreePlaces}");
