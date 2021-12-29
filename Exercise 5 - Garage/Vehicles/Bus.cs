@@ -8,6 +8,10 @@ namespace Exercise_5___Garage.Vehicles
 {
     internal class Bus : Vehicle
     {
+        public Bus(string regNo) : base(regNo)
+        {
+        }
+
         public int NumberOfSeats { get; set; }
 
         public override string ToString()

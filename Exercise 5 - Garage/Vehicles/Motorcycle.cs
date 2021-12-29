@@ -8,6 +8,10 @@ namespace Exercise_5___Garage.Vehicles
 {
     internal class Motorcycle : Vehicle
     {
+        public Motorcycle(string regNo) : base(regNo)
+        {
+        }
+
         public int CylinderVolume { get; set; }
 
         public override string ToString()

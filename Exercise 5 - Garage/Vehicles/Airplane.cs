@@ -8,6 +8,10 @@ namespace Exercise_5___Garage.Vehicles
 {
     internal class Airplane : Vehicle
     {
+        public Airplane(string regNo) : base(regNo)
+        {
+        }
+
         public decimal WingSpan { get; set; }
 
         public int NumberOfEngines { get; set; }

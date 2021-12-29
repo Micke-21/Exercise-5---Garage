@@ -8,7 +8,11 @@ namespace Exercise_5___Garage.Vehicles
 {
     internal class Car : Vehicle
     {
-        public string Fueltype { get; set; }
+        public Car(string regNo) : base(regNo)
+        {
+        }
+
+        public string? Fueltype { get; set; }
 
         public override string ToString()
         {

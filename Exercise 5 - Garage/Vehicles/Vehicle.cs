@@ -11,22 +11,31 @@ namespace Exercise_5___Garage.Vehicles
     {
         private string regNo;
 
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public string Color { get; set; }
+        public Vehicle(string? regNo/*, string make, string model, string color, int noOfWheel*/)
+        {
+            RegNo = regNo;
+            //Make = make;
+            //Model = model;
+            //Color = color;
+            //NoOfWheel = noOfWheel;
+        }
+
+        public string? Make { get; set; }
+        public string? Model { get; set; }
+        public string? Color { get; set; }
+
         public string RegNo
         {
             get => regNo;
-            set
+            private set
             {
-
-                //if (IsRegNoFound(value))
-                //    throw new ArgumentException("Reg no already exists");
-                if (value == null)
-                    throw new ArgumentNullException("Reg no already exists");
+                //if (value == null)
+                if (String.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException(nameof(RegNo), "Reg no already exists");
                 regNo = value.ToUpper();
             }
         }
+
         public int NoOfWheel { get; set; }
 
         public override string ToString()
