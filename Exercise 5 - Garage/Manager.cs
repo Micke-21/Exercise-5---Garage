@@ -56,8 +56,8 @@ namespace Exercise_5___Garage
 
                         //Console.WriteLine("2. List vehicle types.");
                         case "2":
-                            var vehicleTypes = gh.GetVehicleTypes_2();
-                            ui.PrintString(vehicleTypes);
+                            var vehicleTypes = gh.GetVehicleTypes_3();
+                            ui.PrintString("List of Vehicle types\n\n"+vehicleTypes);
 
                             ui.GetKey("\nPress a key to continue.");
                             break;

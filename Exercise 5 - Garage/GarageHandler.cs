@@ -1,4 +1,5 @@
 ﻿using Exercise_5___Garage.Vehicles;
+using System.Text;
 
 namespace Exercise_5___Garage
 {
@@ -69,6 +70,27 @@ namespace Exercise_5___Garage
             return vehicleTypes;
         }
 
+        public string GetVehicleTypes_3()
+        {
+            var vehicles = garage.GetAllVehicle();
+            string vehicleTypes = "";
+            var res = vehicles.GroupBy(v => v.GetType().Name)
+                .Select(v => new
+                {
+                    Name = v.Key,
+                    NoOfType = v.Count()
+
+                })
+                .Select(s => $"Name: {s.Name} \t\tCount: {s.NoOfType}");
+            //.ToString();
+
+            var sb = new StringBuilder();
+
+            foreach (var item in res)
+                sb.AppendLine(item);
+
+            return sb.ToString();
+        }
         public bool GarageIsCreated()
         {
             return garage != null;
@@ -99,6 +121,7 @@ namespace Exercise_5___Garage
         public bool AddVehicle(IUI ui, string choice)
         {
             string? regNo = ui.GetStringInput("Enter Reg no: ");
+            //ToDo Kolla om regnummer finns redan här!?
             var newVehicle = new Vehicle(regNo);
             var newAirplane = new Airplane(regNo);
             var newBoat = new Boat(regNo);

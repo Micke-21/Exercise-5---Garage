@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Exercise_5___Garage
 {
 
-    internal class Garage2<T> : IGarage2<T>, IEnumerable<T>
+    internal class Garage2<T> : IGarage2<T>, IEnumerable<T> where T : Vehicle
     {
         //private readonly Vehicle[] vehicles;
         private readonly T[] vehicles;
@@ -67,21 +67,25 @@ namespace Exercise_5___Garage
         public bool IsRegNoFound(string regNo)
         {
             //For debugging
-            var reg = vehicles.Where((v) => v != null
+            //var reg = vehicles.Where((v) => v != null
             //&& v.RegNo == regNo
-            );
-            var c = reg.Count();
+            //);
+            //var c = reg.Count();
 
-            return c > 0;
+            //return c > 0;
 
-            //bool i = vehicles.Where((v) => v != null && v.RegNo == regNo).Any();
-            //return i;
+            bool i = vehicles.Where((v) => v != null && v.RegNo == regNo).Any();
+            return i;
         }
 
         public bool AddVehicle(T vehicle)
         {
             if (IsFull /*|| IsRegNoFound(vehicle.RegNo)*/)
                 return false;
+
+            //Todo Kolla så att inte regnummer redan finns!
+            if (IsRegNoFound(vehicle.RegNo))
+                throw new ArgumentException("Reg no alrady in Garage, call police ");
 
             for (var i = 0; i < Capacity; i++)
             {
@@ -96,6 +100,9 @@ namespace Exercise_5___Garage
 
         public bool RemoveVehicle(string regNo)
         {
+            if (regNo == null)
+                throw new ArgumentNullException(nameof(regNo), "No reg no passed");
+
             for (var i = 0; i < Capacity; i++)
             {
                 if (vehicles[i] != null /*&& vehicles[i].RegNo == regNo.ToUpper()*/)
@@ -111,12 +118,13 @@ namespace Exercise_5___Garage
         {
             foreach (var item in vehicles)
             {
-                // ...  
-                yield return item;
+                // ...
+                if(item != null) yield return item;
+                //yield return item;
             }
         }
 
-        System.Collections.IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }

@@ -83,8 +83,8 @@ namespace Garage.Tests
             var freePlaceceAfter = garage.FreePlaces;
 
             //Assert
-            Assert.IsTrue(result); 
-            Assert.AreEqual(freePlaceceBefore+1, freePlaceceAfter);
+            Assert.IsTrue(result);
+            Assert.AreEqual(freePlaceceBefore + 1, freePlaceceAfter);
 
         }
 
@@ -158,13 +158,16 @@ namespace Garage.Tests
             var garage = new Garage<Vehicle>(9);
             garage.SeedVehicles();
 
-            var newVehicle = new Airplane("SE-IRD") { Color = "White/Blue", 
-                Make = "Cessna", 
-                Model = "Skyhawk II", 
-                NoOfWheel = 3, 
-                NumberOfEngines = 1, 
+            var newVehicle = new Airplane("SE-IRD")
+            {
+                Color = "White/Blue",
+                Make = "Cessna",
+                Model = "Skyhawk II",
+                NoOfWheel = 3,
+                NumberOfEngines = 1,
                 //RegNo = "SE-IRD", 
-                WingSpan = 10.92M };
+                WingSpan = 10.92M
+            };
             var freePlaceceBefore = garage.FreePlaces;
 
             //Act
@@ -173,7 +176,7 @@ namespace Garage.Tests
 
             //Assert
             Assert.IsTrue(result);
-            Assert.AreEqual(freePlaceceBefore-1, freePlaceceAfter);
+            Assert.AreEqual(freePlaceceBefore - 1, freePlaceceAfter);
         }
 
         [TestMethod]
@@ -204,5 +207,29 @@ namespace Garage.Tests
             Assert.AreEqual(freePlaceceBefore, freePlaceceAfter);
         }
         #endregion AddVehicle tests
+        #region Garage2 tests
+        [TestMethod]
+        [TestCategory("TestCategori")]
+        public void _IsRegNoFound_RegNoFound_Garage2()
+        {
+            //Arrange         
+            var regNo = "ABC1";
+            var garage = new Garage2<Vehicle>(9);
+            garage.SeedVehicles();
+            garage.AddVehicle(new Car("ABC1") { Color = "Yellow" });
+            garage.AddVehicle(new Car("ABC2") { Color = "Yellow" });
+            garage.AddVehicle(new Car("ABC3") { Color = "Yellow" });
+
+            foreach (var vehicle in garage)
+            {
+                Assert.AreEqual("Yellow", vehicle.Color);
+            }
+            //Act
+            var result = garage.IsRegNoFound(regNo);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+        #endregion Garage2 tests
     }
 }
