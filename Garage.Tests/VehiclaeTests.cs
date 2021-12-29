@@ -13,24 +13,7 @@ namespace Garage.Tests
             //Arrange
             var input = "abc123";
             var expected = "ABC123";
-            var vehicle = new Vehicle { RegNo = input };
-
-            //Act
-            var actual = vehicle.RegNo;
-
-            //Assert
-            Assert.IsNotNull(vehicle);
-            Assert.AreEqual(expected, actual);
-
-        }
-
-        [TestMethod]
-        public void Vehicle_NoRegNo_()
-        {
-            //Arrange
-            var input = "";
-            var expected = "";
-            var vehicle = new Vehicle { RegNo = input };
+            var vehicle = new Vehicle(input) /*{ RegNo = input }*/;
 
             //Act
             var actual = vehicle.RegNo;
@@ -43,15 +26,33 @@ namespace Garage.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Vehicle_NullRegNo_()
+        public void Vehicle_NoRegNo_throws()
+        {
+            //Arrange
+            var input = "";
+            var expected = "";
+            var vehicle = new Vehicle(input) /*{ RegNo = input }*/;
+
+            //Act
+            var actual = vehicle.RegNo;
+
+            //Assert
+            Assert.IsNull(vehicle);
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Vehicle_NullRegNo_Throw()
         {
             //Arrange
             string? input = null;
             //var expected = "";
-            var vehicle = new Vehicle { RegNo = input };
+            var vehicle = new Vehicle(input!) /*{ RegNo = input! }*/;
 
             //Act
-            var actual = vehicle.RegNo;
+            _ = vehicle.RegNo;
 
             //Assert
             //Assert.IsNotNull(vehicle);

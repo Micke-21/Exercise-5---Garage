@@ -21,7 +21,7 @@ namespace Garage.Tests
             //Mock<IGarage<Vehicle>> mg = new Mock<IGarage<Vehicle>>();
             //mg.Setup(g => g.IsFull).Returns(true);
 
-            Mock<IUI> ui = new Mock<IUI>();
+            Mock<IUI> ui = new();
             ui.Setup(x => x.GetStringInput(It.IsAny<string>())).Returns("2");
             //1. Vehicle
             ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter Reg no: ")))).Returns("ASD789");
@@ -85,7 +85,7 @@ namespace Garage.Tests
             //Arrange
             var gh = new GarageHandler();
 
-            Mock<IUI> ui = new Mock<IUI>();
+            Mock<IUI> ui = new();
             ui.Setup(x => x.GetStringInput(It.IsAny<string>())).Returns("2");
             //1. Vehicle
             ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter Reg no: ")))).Returns("ASD789");
@@ -113,10 +113,10 @@ namespace Garage.Tests
             gh.AddVehicle(ui.Object, val);
 
             //Act
-            var result = gh.GetVehicle("ASD789");
+            Vehicle? result = gh.GetVehicle("ASD789");
            
             //Assert
-            Assert.AreEqual("ASD789", result.RegNo);
+            Assert.AreEqual("ASD789", result!.RegNo);
             Assert.AreEqual("Volvo", result.Make);
             Assert.AreEqual("V70", result.Model);
             Assert.AreEqual("Vit", result.Color);

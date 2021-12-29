@@ -2,6 +2,7 @@
 using Exercise_5___Garage.Vehicles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 
 namespace Garage.Tests
 {
@@ -12,21 +13,22 @@ namespace Garage.Tests
         [TestMethod]
         [TestCategory("TestCategori")]
         [TestCategory("Mock")]
-        public void M_IsRegNoFound_RegNoFound_()
+        public void IsRegNoFound_()
         {
             //Arrange
-            var mGarage = new Mock<IGarage<Vehicle>>();
+            //var mGarage = new Mock<IGarage<Vehicle>>();
             var regNo = "ABC123";
 
             //mGarage.Setup(m => m.GetAllVehicle()).Returns(new Vehicle[] = null);
-            //var g = new Garage<Vehicle>(9);
-            //g.SeedVehicles();
+            var g = new Garage<Vehicle>(9);
+            g.SeedVehicles();
 
             //Act
             //var result = mGarage.IsRegNoFound(regNo);
+            var result = g.IsRegNoFound(regNo);
 
             //Assert
-            //Assert.IsTrue(result);
+            Assert.IsTrue(result);
 
         }
 
@@ -105,6 +107,46 @@ namespace Garage.Tests
             Assert.AreEqual(freePlaceceBefore, freePlaceceAfter);
 
         }
+
+        [TestMethod]
+        public void RemoveVeicle_NoRegNoEntered_()
+        {
+            //Arrage
+            var garage = new Garage<Vehicle>(9);
+            garage.SeedVehicles();
+
+            var regnoToRemove = "";
+            var freePlaceceBefore = garage.FreePlaces;
+
+            //Act
+            var result = garage.RemoveVehicle(regnoToRemove);
+            var freePlaceceAfter = garage.FreePlaces;
+
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(freePlaceceBefore, freePlaceceAfter);
+
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RemoveVeicle_NullRegNoEntered_()
+        {
+            //Arrage
+            var garage = new Garage<Vehicle>(9);
+            garage.SeedVehicles();
+
+            string? regnoToRemove = null;
+            //var freePlaceceBefore = garage.FreePlaces;
+
+            //Act
+            _ = garage.RemoveVehicle(regnoToRemove!);
+            //var freePlaceceAfter = garage.FreePlaces;
+
+            //Assert
+            //Assert.IsFalse(result);
+            //Assert.AreEqual(freePlaceceBefore, freePlaceceAfter);
+
+        }
         #endregion RemoveVehicle tests
 
         #region AddVehicle tests
@@ -116,12 +158,12 @@ namespace Garage.Tests
             var garage = new Garage<Vehicle>(9);
             garage.SeedVehicles();
 
-            var newVehicle = new Airplane { Color = "White/Blue", 
+            var newVehicle = new Airplane("SE-IRD") { Color = "White/Blue", 
                 Make = "Cessna", 
                 Model = "Skyhawk II", 
                 NoOfWheel = 3, 
                 NumberOfEngines = 1, 
-                RegNo = "SE-IRD", 
+                //RegNo = "SE-IRD", 
                 WingSpan = 10.92M };
             var freePlaceceBefore = garage.FreePlaces;
 
@@ -141,14 +183,14 @@ namespace Garage.Tests
             var garage = new Garage<Vehicle>(9);
             garage.SeedVehicles();
 
-            var newVehicle = new Airplane
+            var newVehicle = new Airplane("SE-VPU")
             {
                 Color = "White/Blue",
                 Make = "Cessna",
                 Model = "Skyhawk II",
                 NoOfWheel = 3,
                 NumberOfEngines = 1,
-                RegNo = "SE-VPU",
+                //RegNo = "SE-VPU",
                 WingSpan = 10.92M
             };
             var freePlaceceBefore = garage.FreePlaces;
