@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercise_5___Garage
+﻿namespace Exercise_5___Garage
 {
+    //ToDo Manager: Dela upp denna funktion???
     internal class Manager
     {
         internal void Run()

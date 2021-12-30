@@ -66,7 +66,7 @@ namespace Garage.Tests
         /// <summary>
         /// Alldeles för stor test mest för att testa lite olika grejer
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="ChosenVehicleTypeToAdd"></param>
         /// <exception cref="ArgumentNullException"></exception>
         [TestMethod]
         [DataRow("1")]
@@ -75,42 +75,42 @@ namespace Garage.Tests
         [DataRow("4")]
         [DataRow("5")]
         [DataRow("6")]
-        public void AddVehicle_DifferentTypesOfVehicle_true(string val)
+        public void AddVehicle_DifferentTypesOfVehicle_true(string ChosenVehicleTypeToAdd)
         {
-            if (val is null)
+            if (ChosenVehicleTypeToAdd is null)
             {
-                throw new ArgumentNullException(nameof(val));
+                throw new ArgumentNullException(nameof(ChosenVehicleTypeToAdd));
             }
 
             //Arrange
             var gh = new GarageHandler();
 
-            Mock<IUI> ui = new();
-            ui.Setup(x => x.GetStringInput(It.IsAny<string>())).Returns("2");
+            Mock<IUI> mockedui = new();
+            mockedui.Setup(x => x.GetStringInput(It.IsAny<string>())).Returns("2");
             //1. Vehicle
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter Reg no: ")))).Returns("ASD789");
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Make:")))).Returns("Volvo");
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Model:")))).Returns("V70");
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Color:")))).Returns("Vit");
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("whells:")))).Returns("4");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter Reg no: ")))).Returns("ASD789");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Make:")))).Returns("Volvo");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Model:")))).Returns("V70");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Color:")))).Returns("Vit");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("whells:")))).Returns("4");
             //2. Airplane
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter WingSpan: ")))).Returns("10,92");
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("No of Engines: ")))).Returns("1");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Enter WingSpan: ")))).Returns("10,92");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("No of Engines: ")))).Returns("1");
             //3. Boat
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Lenght:")))).Returns("32");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Lenght:")))).Returns("32");
             //4. Bus 
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Seats:")))).Returns("45");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("Seats:")))).Returns("45");
             //5. Car
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("FuelType:")))).Returns("E85");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("FuelType:")))).Returns("E85");
             //6. Mororcycle
-            ui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("CylinderVolume:")))).Returns("750");
+            mockedui.Setup(x => x.GetStringInput(It.Is<string>(s => s.Contains("CylinderVolume:")))).Returns("750");
 
             //ToDo går det att få olika värden beroende på vilket anrop det är? Ja!
 
 
             gh.CreatGarage();
             gh.AddVehicle();
-            gh.AddVehicle(ui.Object, val);
+            gh.AddVehicle(mockedui.Object, ChosenVehicleTypeToAdd);
 
             //Act
             Vehicle? result = gh.GetVehicle("ASD789");
@@ -122,7 +122,7 @@ namespace Garage.Tests
             Assert.AreEqual("Vit", result.Color);
             Assert.AreEqual(4, result.NoOfWheel);
 
-            switch (val)
+            switch (ChosenVehicleTypeToAdd)
             {
                 case "2":
                     var v = result as Airplane;
