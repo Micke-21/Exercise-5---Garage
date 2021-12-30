@@ -21,7 +21,7 @@ namespace Exercise_5___Garage
 
         public void CreatGarage(int capacity)
         {
-            garage = new Garage2<Vehicle>(capacity);
+            garage = new Garage<Vehicle>(capacity);
             //garage.SeedVehicles();
             SeedVehicles();
         }

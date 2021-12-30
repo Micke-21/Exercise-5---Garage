@@ -20,7 +20,7 @@ namespace Garage.Tests
             var regNo = "ABC123";
 
             //mGarage.Setup(m => m.GetAllVehicle()).Returns(new Vehicle[] = null);
-            var g = new Garage2<Vehicle>(9);
+            var g = new Garage<Vehicle>(9);
             //g.SeedVehicles();
             g.AddVehicle(new Car(regNo));
 
@@ -39,7 +39,7 @@ namespace Garage.Tests
         {
             //Arrange         
             var regNo = "ABC123";
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car(regNo));
 
@@ -56,7 +56,7 @@ namespace Garage.Tests
             //ToDo TEST Fix Moq
             //Arrange
             var regNo = "NotFound";
-            var g = new Garage2<Vehicle>(9);
+            var g = new Garage<Vehicle>(9);
             //g.SeedVehicles();
             g.AddVehicle(new Car("ABC123"));
 
@@ -75,7 +75,7 @@ namespace Garage.Tests
         public void RemoveVeicle_ByRegNo_VehicleRemoved()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC123"));
 
@@ -96,7 +96,7 @@ namespace Garage.Tests
         public void RemoveVeicle_ByVehicle_VehicleRemoved()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC456"));
             garage.AddVehicle(new Car("ABC123"));
@@ -120,7 +120,7 @@ namespace Garage.Tests
         public void RemoveVeicle_ByVehicle_NoVehicleFound_VehicleRemoved_Throws()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC456"));
             garage.AddVehicle(new Car("ABC123"));
@@ -142,7 +142,7 @@ namespace Garage.Tests
         public void RemoveVeicle_VehicleNotFoundRemoved()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC123"));
 
@@ -163,7 +163,7 @@ namespace Garage.Tests
         public void RemoveVeicle_NoRegNoEntered_()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC123"));
 
@@ -184,7 +184,7 @@ namespace Garage.Tests
         public void RemoveVeicle_NullRegNoEntered_()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC123"));
 
@@ -208,7 +208,7 @@ namespace Garage.Tests
         public void AddVehicle_VehicleAdded_True()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             _ = garage.AddVehicle(new Car("ABC123"));
 
@@ -238,7 +238,7 @@ namespace Garage.Tests
         public void AddVehicle_VehicleAlreadyAdded_Fasle()
         {
             //Arrage
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Airplane("SE-VPU"));
 
@@ -270,7 +270,7 @@ namespace Garage.Tests
         {
             //Arrange         
             var regNo = "ABC1";
-            var garage = new Garage2<Vehicle>(9);
+            var garage = new Garage<Vehicle>(9);
             //garage.SeedVehicles();
             garage.AddVehicle(new Car("ABC1") { Color = "Yellow" });
             garage.AddVehicle(new Car("ABC2") { Color = "Yellow" });
