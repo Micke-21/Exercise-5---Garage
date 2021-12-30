@@ -117,6 +117,22 @@ namespace Exercise_5___Garage
             return false;
         }
 
+        public bool RemoveVehicle(T vehicle)
+        {
+            if (vehicle == null)
+                throw new ArgumentNullException(nameof(vehicle), "No vehicle passed");
+
+            for (var i = 0; i < Capacity; i++)
+            {
+                //ToDo är null kollen nådvändig? Nu när jag fått IEnemerable att funka!
+                if (vehicles[i] != null && vehicles[i] == vehicle)
+                {
+                    vehicles[i] = default;// null;
+                    return true;
+                }
+            }
+            return false;
+        }
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var item in vehicles)

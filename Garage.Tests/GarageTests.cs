@@ -69,7 +69,7 @@ namespace Garage.Tests
         #region RemoveVehicle tests
 
         [TestMethod]
-        public void RemoveVeicle_VehicleRemoved()
+        public void RemoveVeicle_ByRegNo_VehicleRemoved()
         {
             //Arrage
             var garage = new Garage<Vehicle>(9);
@@ -85,6 +85,52 @@ namespace Garage.Tests
             //Assert
             Assert.IsTrue(result);
             Assert.AreEqual(freePlaceceBefore + 1, freePlaceceAfter);
+
+        }
+
+        [TestMethod]
+        public void RemoveVeicle_ByVehicle_VehicleRemoved()
+        {
+            //Arrage
+            var garage = new Garage2<Vehicle>(9);
+            //garage.SeedVehicles();
+            garage.AddVehicle(new Car("ABC456"));
+            garage.AddVehicle(new Car("ABC123"));
+
+            var regnoToRemove = "ABC123";
+            var freePlaceceBefore = garage.FreePlaces;
+            var vehicleToRemove = garage.GetVehicleByRegNo(regnoToRemove);
+
+            //Act
+            var result = garage.RemoveVehicle(vehicleToRemove);
+            var freePlaceceAfter = garage.FreePlaces;
+
+            //Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(freePlaceceBefore + 1, freePlaceceAfter);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RemoveVeicle_ByVehicle_NoVehicleFound_VehicleRemoved_Throws()
+        {
+            //Arrage
+            var garage = new Garage2<Vehicle>(9);
+            //garage.SeedVehicles();
+            garage.AddVehicle(new Car("ABC456"));
+            garage.AddVehicle(new Car("ABC123"));
+
+            var regnoToRemove = "REGNONOTFOUND";
+            
+            var vehicleToRemove = garage.GetVehicleByRegNo(regnoToRemove);
+
+            //Act
+            _ = garage.RemoveVehicle(vehicleToRemove!);
+
+
+            //Assert
+
 
         }
 
