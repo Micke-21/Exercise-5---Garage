@@ -35,6 +35,5 @@ namespace Exercise_5___Garage
         bool AddVehicle(T vehicle);
         bool RemoveVehicle(string regNo);
 
-        void SeedVehicles();
     }
 }
