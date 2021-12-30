@@ -6,7 +6,7 @@ namespace Exercise_5___Garage
     public class GarageHandler : IGarageHandler
     {
         private readonly int capacity = 9;
-        private IGarage2<Vehicle> garage;
+        private IGarage<Vehicle> garage;
 
 
         public GarageHandler()
@@ -122,7 +122,24 @@ namespace Exercise_5___Garage
         public bool AddVehicle(IUI ui, string choice)
         {
             string? regNo = ui.GetStringInput("Enter Reg no: ");
-            //ToDo Kolla om regnummer finns redan här!?
+            //ToDo Kolla om regnummer finns!?
+            if (string.IsNullOrEmpty(regNo))
+            {
+                ui.GetKey("Reg no not valid or already found");
+                return false;
+            }
+            if (garage.IsRegNoInGarage(regNo))
+            {
+                //ui.PrintString("Reg no not valid or already found");
+                ui.GetKey("Reg no already found");
+                return false;
+            }
+            var make = ui.GetStringInput("Enter Make: ");
+            var model = ui.GetStringInput("Enter Model: ");
+            var color = ui.GetStringInput("Enter Color: ");
+            var noWheel = int.TryParse(ui.GetStringInput("Enter number of whells: "), out int iow) ? iow : 0;
+
+            //ToDo GarageHandler: Jag har Scope problem vill egentligen inte skapa upp så här många objekt! 
             var newVehicle = new Vehicle(regNo);
             var newAirplane = new Airplane(regNo);
             var newBoat = new Boat(regNo);
@@ -130,12 +147,7 @@ namespace Exercise_5___Garage
             var newCar = new Car(regNo);
             var newMotorcycle = new Motorcycle(regNo);
 
-            var make = ui.GetStringInput("Enter Make: ");
-            var model = ui.GetStringInput("Enter Model: ");
-            var color = ui.GetStringInput("Enter Color: ");
-            var noWheel = int.TryParse(ui.GetStringInput("Enter number of whells: "), out int iow) ? iow : 0;
-
-            bool result = false;
+            bool vehicleadded = false;
 
             switch (choice)
             {
@@ -146,7 +158,7 @@ namespace Exercise_5___Garage
                     newVehicle.Color = color;
                     newVehicle.NoOfWheel = noWheel;
 
-                    result = garage.AddVehicle(newVehicle);
+                    vehicleadded = garage.AddVehicle(newVehicle);
                     break;
                 case "2": //Airplane
                     //newAirplane.RegNo = regNo;
@@ -161,7 +173,7 @@ namespace Exercise_5___Garage
                     newAirplane.WingSpan = decimal.TryParse(wingspan, out decimal w) ? w : 0;
                     newAirplane.NumberOfEngines = int.TryParse(noEngines, out int noe) ? noe : 0;
 
-                    result = garage.AddVehicle(newAirplane);
+                    vehicleadded = garage.AddVehicle(newAirplane);
                     break;
                 case "3": //Boat
                     //newBoat.RegNo = regNo;
@@ -173,7 +185,7 @@ namespace Exercise_5___Garage
                     var length = ui.GetStringInput("Enter Lenght: ");
                     newBoat.Lenght = int.TryParse(length, out int l) ? l : 0;
 
-                    result = garage.AddVehicle(newBoat);
+                    vehicleadded = garage.AddVehicle(newBoat);
                     break;
                 case "4": //Bus
                     //newBus.RegNo = regNo;
@@ -185,7 +197,7 @@ namespace Exercise_5___Garage
                     var noSeats = ui.GetStringInput("Enter Number of Seats: ");
                     newBus.NumberOfSeats = int.TryParse(noSeats, out int nos) ? nos : 0;
 
-                    result = garage.AddVehicle(newBus);
+                    vehicleadded = garage.AddVehicle(newBus);
                     break;
                 case "5": //Car
                     //newCar.RegNo = regNo;
@@ -197,7 +209,7 @@ namespace Exercise_5___Garage
                     var fueltype = ui.GetStringInput("Enter FuelType: ");
                     newCar.Fueltype = fueltype;
 
-                    result = garage.AddVehicle(newCar);
+                    vehicleadded = garage.AddVehicle(newCar);
                     break;
                 case "6": //Motorcycle
                     //newMotorcycle.RegNo = regNo;
@@ -209,15 +221,114 @@ namespace Exercise_5___Garage
                     var cylindeVol = ui.GetStringInput("Enter CylinderVolume:");
                     newMotorcycle.CylinderVolume = int.TryParse(cylindeVol, out int cv) ? cv : 0;
 
-                    result = garage.AddVehicle(newMotorcycle);
+                    vehicleadded = garage.AddVehicle(newMotorcycle);
                     break;
 
                 default:
                     break;
             }
 
-            return result;
+            return vehicleadded;
         }
+
+        public bool AddVehicle_2(IUI ui, string choice)
+        {
+            string? regNo = ui.GetStringInput("Enter Reg no: ");
+            //ToDo Kolla om regnummer finns!?
+            if (string.IsNullOrEmpty(regNo))
+            {
+                ui.GetKey("Reg no not valid or already found");
+                return false;
+            }
+            if (garage.IsRegNoInGarage(regNo))
+            {
+                //ui.PrintString("Reg no not valid or already found");
+                ui.GetKey("Reg no already found");
+                return false;
+            }
+            var make = ui.GetStringInput("Enter Make: ");
+            var model = ui.GetStringInput("Enter Model: ");
+            var color = ui.GetStringInput("Enter Color: ");
+            var noWheel = int.TryParse(ui.GetStringInput("Enter number of whells: "), out int iow) ? iow : 0;
+
+            //ToDo GarageHandler: Jag har Scope problem vill egentligen inte skapa upp så här många objekt! 
+            //var newVehicle = new Vehicle(regNo);
+            //var newAirplane = new Airplane(regNo);
+            //var newBoat = new Boat(regNo);
+            //var newBus = new Bus(regNo);
+            //var newCar = new Car(regNo);
+            //var newMotorcycle = new Motorcycle(regNo);
+
+            bool vehicleadded = false;
+
+            IVehicle? vehicle = null;
+
+
+            switch (choice)
+            {
+                case "1":
+                    vehicle = new Vehicle(regNo);
+
+                    break;
+                case "2": //Airplane
+                    var airplane = new Airplane(regNo);
+
+                    var wingspan = ui.GetStringInput("Enter WingSpan: ");
+                    var noEngines = ui.GetStringInput("Enter No of Engines: ");
+
+                    airplane.WingSpan = decimal.TryParse(wingspan, out decimal w) ? w : 0;
+                    airplane.NumberOfEngines = int.TryParse(noEngines, out int noe) ? noe : 0;
+
+                    vehicle = airplane;
+                    break;
+                case "3": //Boat
+                    var boat = new Boat(regNo);
+
+                    var length = ui.GetStringInput("Enter Lenght: ");
+                    boat.Lenght = int.TryParse(length, out int l) ? l : 0;
+
+                    vehicle = boat;
+                    break;
+                case "4": //Bus
+                    var bus = new Bus(regNo);
+
+                    var noSeats = ui.GetStringInput("Enter Number of Seats: ");
+                    bus.NumberOfSeats = int.TryParse(noSeats, out int nos) ? nos : 0;
+
+                    vehicle = bus;
+                    break;
+                case "5": //Car
+                    var car = new Car(regNo);
+                    var fueltype = ui.GetStringInput("Enter FuelType: ");
+                    car.Fueltype = fueltype;
+
+                    vehicle = car;
+                    break;
+                case "6": //Motorcycle
+                    var motorcycle = new Motorcycle(regNo);
+                    var cylindeVol = ui.GetStringInput("Enter CylinderVolume:");
+                    motorcycle.CylinderVolume = int.TryParse(cylindeVol, out int cv) ? cv : 0;
+
+                    vehicle = motorcycle;
+                    break;
+
+                    //default:
+                    //    break;
+            }
+
+            if (vehicle != null)
+            {
+                vehicle.Make = make;
+                vehicle.Model = model;
+                vehicle.Color = color;
+                vehicle.NoOfWheel = noWheel;
+
+                vehicleadded = garage.AddVehicle((Vehicle)vehicle);
+            }
+
+            return vehicleadded;
+        }
+
 
         /// <summary>
         /// En test medtod för att testa lite saker under utvecklingen.
@@ -228,7 +339,7 @@ namespace Exercise_5___Garage
             Console.WriteLine("TEST METOD");
             var regno = "MLB063";
 
-            if (garage.IsRegNoFound(regno))
+            if (garage.IsRegNoInGarage(regno))
                 Console.WriteLine($"Regno {regno} finns redan");
             else
                 Console.WriteLine($"Regno {regno} finns ej");

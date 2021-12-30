@@ -7,7 +7,7 @@ using Exercise_5___Garage;
 
 namespace Exercise_5___Garage.Vehicles
 {
-    public class Vehicle
+    public class Vehicle : IVehicle
     {
         private string regNo;
 

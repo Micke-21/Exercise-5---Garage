@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Exercise_5___Garage
 {
 
-    internal class Garage<T> : IGarage2<T>, IEnumerable<T> where T : Vehicle
+    internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : Vehicle
     {
         //private readonly Vehicle[] vehicles;
         private readonly T[] vehicles;
@@ -57,17 +57,14 @@ namespace Exercise_5___Garage
 
         public T? GetVehicleByRegNo(string regNo)
         {
-            //var vehicle = vehicles.Where(v => v.RegNo == regNo.ToUpper()).ToArray();
-            var vehicle = vehicles.FirstOrDefault((v) => v != null
-            && v.RegNo == regNo.ToUpper()
-            );
+            var vehicle = vehicles.FirstOrDefault((v) => v != null && v.RegNo == regNo.ToUpper());
 
             //var vehicle = vehicles.FirstOrDefault((v) => v.RegNo == regNo.ToUpper());
 
             return vehicle;
         }
 
-        public bool IsRegNoFound(string regNo)
+        public bool IsRegNoInGarage(string regNo)
         {
             //For debugging
             //var reg = vehicles.Where((v) => v != null
@@ -77,17 +74,17 @@ namespace Exercise_5___Garage
 
             //return c > 0;
 
-            bool i = vehicles.Where((v) => v != null && v.RegNo == regNo).Any();
+            bool i = vehicles.Where((v) => v != null && v.RegNo == regNo.ToUpper()).Any();
             return i;
         }
 
         public bool AddVehicle(T vehicle)
         {
-            if (IsFull /*|| IsRegNoFound(vehicle.RegNo)*/)
+            if (IsFull)
                 return false;
 
             //Todo Kolla så att inte regnummer redan finns!
-            if (IsRegNoFound(vehicle.RegNo))
+            if (IsRegNoInGarage(vehicle.RegNo))
                 throw new ArgumentException("Reg no alrady in Garage, call police ");
 
             for (var i = 0; i < Capacity; i++)
@@ -141,7 +138,6 @@ namespace Exercise_5___Garage
             {
                 // ...
                 if (item != null) yield return item;
-                //yield return item;
             }
         }
 

@@ -26,7 +26,7 @@ namespace Garage.Tests
 
             //Act
             //var result = mGarage.IsRegNoFound(regNo);
-            var result = g.IsRegNoFound(regNo);
+            var result = g.IsRegNoInGarage(regNo);
 
             //Assert
             Assert.IsTrue(result);
@@ -44,7 +44,7 @@ namespace Garage.Tests
             garage.AddVehicle(new Car(regNo));
 
             //Act
-            var result = garage.IsRegNoFound(regNo);
+            var result = garage.IsRegNoInGarage(regNo);
 
             //Assert
             Assert.IsTrue(result);
@@ -61,7 +61,7 @@ namespace Garage.Tests
             g.AddVehicle(new Car("ABC123"));
 
             //Act
-            var result = g.IsRegNoFound(regNo);
+            var result = g.IsRegNoInGarage(regNo);
 
             //Assert
             Assert.IsFalse(result);
@@ -266,7 +266,7 @@ namespace Garage.Tests
         #region Garage2 tests
         [TestMethod]
         [TestCategory("TestCategori")]
-        public void _IsRegNoFound_RegNoFound_Garage2()
+        public void IsRegNoFound_RegNoFound_Garage()
         {
             //Arrange         
             var regNo = "ABC1";
@@ -281,7 +281,7 @@ namespace Garage.Tests
                 Assert.AreEqual("Yellow", vehicle.Color);
             }
             //Act
-            var result = garage.IsRegNoFound(regNo);
+            var result = garage.IsRegNoInGarage(regNo);
 
             //Assert
             Assert.IsTrue(result);

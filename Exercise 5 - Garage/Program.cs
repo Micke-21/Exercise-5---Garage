@@ -2,8 +2,8 @@
 using Exercise_5___Garage;
 
 
-var garageStarter = new Manager();
-garageStarter.Run();
+//var garageStarter = new Manager();
+Manager.Run();
 
 Console.WriteLine("");
 

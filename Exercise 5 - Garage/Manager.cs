@@ -3,7 +3,7 @@
     //ToDo Manager: Dela upp denna funktion???
     internal class Manager
     {
-        internal void Run()
+        internal static void Run()
         {
             var gh = new GarageHandler();
             IUI ui = new UI();
@@ -70,7 +70,7 @@
                                 ui.ChoseVehicleToAdd();
                                 choice = ui.GetMenuChoice();
 
-                                if (gh.AddVehicle(ui, choice!))
+                                if (gh.AddVehicle_2(ui, choice!))
                                     ui.PrintString("Vehicle added.");
                                 else
                                     ui.PrintString("Vehcile not added");
