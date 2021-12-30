@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Exercise_5___Garage
 {
 
-    internal class Garage<T> : IGarage<T> //: IEnumerable<T>
+    internal class Garage_Old<T> : IGarage<T> //: IEnumerable<T>
     {
         private readonly Vehicle[] vehicles;
         //private readonly T[] vehicles;
@@ -26,7 +26,7 @@ namespace Exercise_5___Garage
             return noOfVehicles;
         }
 
-        public Garage(int capacity)
+        public Garage_Old(int capacity)
         {
             Capacity = capacity;
             vehicles = new Vehicle[Capacity];

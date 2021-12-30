@@ -108,7 +108,7 @@ namespace Exercise_5___Garage
 
             for (var i = 0; i < Capacity; i++)
             {
-                if (vehicles[i] != null /*&& vehicles[i].RegNo == regNo.ToUpper()*/)
+                if (vehicles[i] != null && vehicles[i].RegNo == regNo.ToUpper())
                 {
                     vehicles[i] = default;// null;
                     return true;
