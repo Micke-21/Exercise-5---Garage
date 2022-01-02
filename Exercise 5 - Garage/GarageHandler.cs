@@ -115,6 +115,7 @@ namespace Exercise_5___Garage
 
         /// <summary>
         /// Used for adding vehicles to the garage
+        /// Gör typ samma sak för varje fordonstyp!
         /// </summary>
         /// <param name="ui"></param>
         /// <param name="choice"></param>
@@ -231,6 +232,7 @@ namespace Exercise_5___Garage
             return vehicleadded;
         }
 
+        //Ny metod för att testa att ta bort repetiv kod
         public bool AddVehicle(IUI ui, string choice)
         {
             string? regNo = ui.GetStringInput("Enter Reg no: ");
@@ -351,6 +353,7 @@ namespace Exercise_5___Garage
         {
             var seedMethode = 3;
 
+            // Funkar inte här har inte tillgång till arrayen!
             //if (seedMethode == 1)  // Kan få Null värden mitt i listan
             //{
 
@@ -366,6 +369,7 @@ namespace Exercise_5___Garage
             //    vehicles[8] = new Motorcycle(regNo: "MC406") { Make = "Honda", Model = "CB-125", Color = "Black", /*RegNo = "MC406",*/ NoOfWheel = 2, CylinderVolume = 125 };
             //}
 
+            // Funkar inte här har inte tillgång till arrayen!
             //if (seedMethode == 2) // ev null i slutet av listan (fyller på från början av arrayen)
             //{
             //    Vehicle[] seedVehicles = {
@@ -391,18 +395,19 @@ namespace Exercise_5___Garage
             //}
             //}
 
+            //Denna funar då den använder funktionen för att lägga till fordon!
             if (seedMethode == 3)// Using the addmethode
             {
-                garage.AddVehicle(new Vehicle(regNo: "ABC123") { Make = "SAAB", Model = "V4", NoOfWheel = 4, Color = "Green"/*, RegNo = "ABC123"*/ });
-                garage.AddVehicle(new Vehicle(regNo: "MLB061") { Color = "Blue"/*, RegNo = "MLB061"*/ });
-                //garage.AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB061" });
-                //garage.AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB062" });
-                //garage.AddVehicle(new Vehicle() { Color = "Blue", RegNo = "MLB063" });
-                garage.AddVehicle(new Airplane(regNo: "SE-VPU") { Make = "Dynamic", Model = "WT-9", Color = "Blue"/*, RegNo = "SE-VPU"*/, NumberOfEngines = 1, WingSpan = 9.00M });
-                garage.AddVehicle(new Boat(regNo: "SE6045") { Make = "Swan", Model = "12a", Color = "White"/*, RegNo = "SE6045"*/, Lenght = 35, NoOfWheel = 0 });
-                garage.AddVehicle(new Bus(regNo: "BUS101") { Make = "Volvo", Model = "X2000", Color = "Blue"/*, RegNo = "BUS101"*/, NoOfWheel = 6, NumberOfSeats = 56 });
-                garage.AddVehicle(new Car(regNo: "TEST") { Make = "Volvo", Model = "XC90", Color = "Blue"/*, RegNo = "TEST"*/, Fueltype = "E85", NoOfWheel = 4 });
-                garage.AddVehicle(new Motorcycle(regNo: "MC406") { Make = "Honda", Model = "CB-125", Color = "Blue"/*, RegNo = "MC406"*/, NoOfWheel = 2, CylinderVolume = 125 });
+                garage.AddVehicle(new Vehicle(regNo: "ABC123") { Make = "SAAB", Model = "V4", NoOfWheel = 4, Color = "Green" });
+                garage.AddVehicle(new Vehicle(regNo: "MLB061") { Color = "Blue"});
+                //garage.AddVehicle(new Vehicle(regNo: "MLB061") { Color = "Blue" });
+                //garage.AddVehicle(new Vehicle(regNo: "MLB062") { Color = "Blue" });
+                //garage.AddVehicle(new Vehicle(regNo: "MLB063") { Color = "Blue" });
+                garage.AddVehicle(new Airplane(regNo: "SE-VPU") { Make = "Dynamic", Model = "WT-9", Color = "Blue", NumberOfEngines = 1, WingSpan = 9.00M });
+                garage.AddVehicle(new Boat(regNo: "SE6045") { Make = "Swan", Model = "12a", Color = "White", Lenght = 35, NoOfWheel = 0 });
+                garage.AddVehicle(new Bus(regNo: "BUS101") { Make = "Volvo", Model = "X2000", Color = "Blue", NoOfWheel = 6, NumberOfSeats = 56 });
+                garage.AddVehicle(new Car(regNo: "TEST") { Make = "Volvo", Model = "XC90", Color = "Blue", Fueltype = "E85", NoOfWheel = 4 });
+                garage.AddVehicle(new Motorcycle(regNo: "MC406") { Make = "Honda", Model = "CB-125", Color = "Blue", NoOfWheel = 2, CylinderVolume = 125 });
             }
             /*
             RegNo = "ABC123"

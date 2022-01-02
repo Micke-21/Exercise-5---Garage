@@ -3,7 +3,11 @@ using Exercise_5___Garage;
 
 
 //var garageStarter = new Manager();
-Manager.Run();
+//garageStarter.Run();
+
+
+var startup = new StartUp();
+startup.SetUp();
 
 Console.WriteLine("");
 

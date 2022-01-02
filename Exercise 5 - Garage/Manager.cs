@@ -3,12 +3,27 @@
     //ToDo Manager: Dela upp denna funktion???
     internal class Manager
     {
-        internal static void Run()
-        {
-            var gh = new GarageHandler();
-            IUI ui = new UI();
-            var exit = false;
+        private IUI ui;
+        private IGarageHandler gh;
 
+        // startar som "vanlig"
+        public Manager()
+        {
+            gh = new GarageHandler();
+            ui = new UI();
+        }
+
+        //Start via DI
+        public Manager(IUI ui, IGarageHandler garageHandler)
+        {
+            gh = garageHandler;
+            this.ui = ui;
+        }
+
+        internal void Run()
+        {
+
+            var exit = false;
             do
             {
                 if (!gh.GarageIsCreated())
@@ -22,7 +37,7 @@
                             break;
                         case "2":
                             string? stringInput = ui.GetStringInput("How many parkingplaces should the garage have? ");
-                            int capacity = int.TryParse(stringInput, out capacity)?capacity:0;
+                            int capacity = int.TryParse(stringInput, out capacity) ? capacity : 0;
                             gh.CreatGarage(capacity);
                             break;
 
@@ -52,7 +67,7 @@
                         //Console.WriteLine("2. List vehicle types.");
                         case "2":
                             var vehicleTypes = gh.GetVehicleTypes_3();
-                            ui.PrintString("List of Vehicle types\n\n"+vehicleTypes);
+                            ui.PrintString("List of Vehicle types\n\n" + vehicleTypes);
 
                             ui.GetKey("\nPress a key to continue.");
                             break;
