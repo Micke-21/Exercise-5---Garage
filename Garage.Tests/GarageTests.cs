@@ -106,7 +106,7 @@ namespace Garage.Tests
             var vehicleToRemove = garage.GetVehicleByRegNo(regnoToRemove);
 
             //Act
-            var result = garage.RemoveVehicle(vehicleToRemove);
+            var result = garage.RemoveVehicle(vehicleToRemove!);
             var freePlaceceAfter = garage.FreePlaces;
 
             //Assert

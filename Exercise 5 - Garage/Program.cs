@@ -5,7 +5,9 @@ using Exercise_5___Garage;
 //var garageStarter = new Manager();
 //garageStarter.Run();
 
-
+/// <summary>
+/// Using DI 
+/// </summary>
 var startup = new StartUp();
 startup.SetUp();
 

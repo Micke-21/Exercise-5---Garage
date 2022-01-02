@@ -9,6 +9,9 @@ namespace Exercise_5___Garage
 {
     public class UI : IUI
     {
+        /// <summary>
+        /// Shows the Start menu
+        /// </summary>
         public void ShowStartMenu()
         {
             Console.WriteLine("Menu\n");
@@ -18,6 +21,9 @@ namespace Exercise_5___Garage
             Console.WriteLine("Q. Quit");
         }
 
+        /// <summary>
+        /// Shows the menu
+        /// </summary>
         public void ShowMenu()
         {
             Console.Clear();
@@ -33,6 +39,9 @@ namespace Exercise_5___Garage
             Console.WriteLine("Q. Quit");
         }
 
+        /// <summary>
+        /// Prints the liste of vheicle types to add
+        /// </summary>
         public void ChoseVehicleToAdd()
         {
             Console.Clear();
@@ -46,12 +55,20 @@ namespace Exercise_5___Garage
 
         }
 
+        /// <summary>
+        /// Get a choice from the user
+        /// </summary>
+        /// <returns></returns>
         public string? GetMenuChoice()
         {
             Console.Write("Enter your choice: ");
             return Console.ReadLine();
         }
 
+        /// <summary>
+        /// Print a list of vehicles
+        /// </summary>
+        /// <param name="vehicles">list of vehicles to print</param>
         public void ListAllVehicles(IEnumerable<Vehicle> vehicles)
         {
             Console.Clear();
@@ -62,18 +79,32 @@ namespace Exercise_5___Garage
             }
         }
 
+        /// <summary>
+        /// Get a string input from user
+        /// </summary>
+        /// <param name="message">Message to print</param>
+        /// <returns>Returns the string entered</returns>
         public string? GetStringInput(string message)
         {
             Console.Write($"{message}: ");
             return Console.ReadLine();
         }
 
+        /// <summary>
+        /// Wait for the user to press a kye
+        /// </summary>
+        /// <param name="message">Message to print.</param>
+        /// <returns>Returns the key pressed.</returns>
         public char GetKey(string message)
         {
             Console.Write($"{message} ");
             return Console.ReadKey().KeyChar;
         }
 
+        /// <summary>
+        /// Print a Vehicle
+        /// </summary>
+        /// <param name="vehicle">Vehicle to print</param>
         public void PrintVehicle(Vehicle vehicle)
         {
             Console.Clear();
@@ -84,9 +115,12 @@ namespace Exercise_5___Garage
                 Console.WriteLine($"{vehicle}");
         }
 
-        public void PrintString(string message)
+
+
+        public void PrintString(string message, bool clear = true)
         {
-            Console.Clear();
+            if (clear)
+                Console.Clear();
             Console.WriteLine(message);
         }
     }

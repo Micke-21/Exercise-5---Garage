@@ -3,8 +3,8 @@
     //ToDo Manager: Dela upp denna funktion???
     internal class Manager
     {
-        private IUI ui;
-        private IGarageHandler gh;
+        private readonly IUI ui;
+        private readonly IGarageHandler gh;
 
         // startar som "vanlig"
         public Manager()

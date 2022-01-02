@@ -22,41 +22,74 @@ namespace Exercise_5___Garage
         public void CreatGarage(int capacity)
         {
             garage = new Garage<Vehicle>(capacity);
-            //garage.SeedVehicles();
             SeedVehicles();
         }
 
+
+        /// <summary>
+        /// Check if the Garage is full
+        /// </summary>
+        /// <returns>True if full otherwise False</returns>
         public bool IsGarageFull()
         {
-            //var g = garage.IsFull;
             return garage.IsFull;
         }
+
+        /// <summary>
+        /// Get alla vehicles in the garage
+        /// </summary>
+        /// <returns>Returns a array of vehicles</returns>
         public Vehicle[] GetAllVehicles()
         {
             return garage.GetAllVehicle();
         }
 
+        /// <summary>
+        /// Get vehicle by the registration number
+        /// </summary>
+        /// <param name="regNo">Reg no to search</param>
+        /// <returns>The vehicle, null if not found</returns>
         public Vehicle? GetVehicle(string regNo)
         {
             return garage.GetVehicleByRegNo(regNo);
         }
 
+        /// <summary>
+        /// Get vehicle by the registration number
+        /// Using link
+        /// </summary>
+        /// <param name="regNo">Reg no to search</param>
+        /// <returns>The vehicle, null if not found</returns>
         public Vehicle? GetVehicle_2(string regNo)
         {
             //if (string.IsNullOrWhiteSpace(regNo))
             if (regNo is null)
                 throw new ArgumentNullException(nameof(regNo), "Reg no can't be null.");
-            var vehicles = garage.GetAllVehicle();
-            var vehicle = vehicles.Where(v => v.RegNo == regNo.ToUpper()).FirstOrDefault();
 
-            return vehicle;
+            //var vehicles = garage.GetAllVehicle();
+            //var vehicle = vehicles.Where(v => v.RegNo == regNo.ToUpper()).FirstOrDefault();
+
+            //return vehicle;
+
+            return garage.GetAllVehicle().Where(v => v.RegNo == regNo.ToUpper()).FirstOrDefault(); 
+            
+
         }
 
+        /// <summary>
+        /// Get vehicle types from the garage
+        /// </summary>
+        /// <returns></returns>
         public string GetVehicleTypes()
         {
             return garage.GetVehicleTypes();
         }
 
+
+        /// <summary>
+        /// Get vehicle types by filtering in garagehandler
+        /// </summary>
+        /// <returns>Returns the list of vehicle types as a string.</returns>
         public string GetVehicleTypes_2()
         {
             var vehicles = garage.GetAllVehicle();
@@ -92,11 +125,22 @@ namespace Exercise_5___Garage
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Tests if the Grage is created
+        /// </summary>
+        /// <returns>True or false indicating that the Grage is created</returns>
         public bool GarageIsCreated()
         {
             return garage != null;
         }
 
+        /// <summary>
+        /// Removes a Vehicle by the reg no
+        /// </summary>
+        /// <param name="regNo">The regno to remove/unpark</param>
+        /// <returns>True if the vehicle is unparked ok or
+        /// False if cant unpark the vehicle</returns>
         public bool RemoveVehicle(string regNo)
         {
             return garage.RemoveVehicle(regNo);
@@ -244,7 +288,6 @@ namespace Exercise_5___Garage
             }
             if (garage.IsRegNoInGarage(regNo))
             {
-                //ui.PrintString("Reg no not valid or already found");
                 ui.GetKey("Reg no already found");
                 return false;
             }

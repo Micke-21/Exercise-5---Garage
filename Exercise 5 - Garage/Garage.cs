@@ -20,24 +20,39 @@ namespace Exercise_5___Garage
         public bool IsFull => Capacity <= Count();
         public int FreePlaces => Capacity - Count();
 
-        private int Count()
-        {
-            var noOfVehicles = vehicles.Where((v) => v != null).Count();
-            return noOfVehicles;
-        }
-
         public Garage(int capacity)
         {
             Capacity = capacity;
             vehicles = new T[Capacity];
         }
 
+        /// <summary>
+        /// Get the number of vehicles in the Garage
+        /// </summary>
+        /// <returns>The number of vehicles in the Garage</returns>
+        private int Count()
+        {
+            var noOfVehicles = vehicles.Where((v) => v != null).Count();
+            return noOfVehicles;
+        }
+
+
+        /// <summary>
+        /// Ge all Vehicles
+        /// </summary>
+        /// <returns>Returns all parked Vehicles</returns>
         public T[] GetAllVehicle()
         {
             var v = vehicles.Where(v => v != null).ToArray();
             return v;
         }
 
+        /// <summary>
+        /// Get VehicleTypes
+        /// </summary>
+        /// <returns>Returns a string whit the vehicle types</returns>
+        /// <remarks></remarks>
+        [Obsolete("Use the Methode in GarageHandler istead")]
         public string GetVehicleTypes()
         {
             var f = vehicles.Select((v) => v.GetType().Name.GroupBy(g => g.GetType().Name));
@@ -53,7 +68,11 @@ namespace Exercise_5___Garage
             return vehicleTypes;
         }
 
-
+        /// <summary>
+        /// Get vehicle be the registration number
+        /// </summary>
+        /// <param name="regNo">Reg no to search</param>
+        /// <returns>Returns the Vehicle</returns>
         public T? GetVehicleByRegNo(string regNo)
         {
             var vehicle = vehicles.FirstOrDefault((v) => v != null && v.RegNo == regNo.ToUpper());
@@ -63,6 +82,11 @@ namespace Exercise_5___Garage
             return vehicle;
         }
 
+        /// <summary>
+        /// Test if the registration number alrady are in the Garage
+        /// </summary>
+        /// <param name="regNo">Reg no to test</param>
+        /// <returns>True if the reg no alrady in the garage outerthise False</returns>
         public bool IsRegNoInGarage(string regNo)
         {
             //For debugging
@@ -77,6 +101,12 @@ namespace Exercise_5___Garage
             return i;
         }
 
+        /// <summary>
+        /// Add (park) a vehicle in the Garage
+        /// </summary>
+        /// <param name="vehicle">Vehicle to park</param>
+        /// <returns>True if vehicle parked ok, False not parked</returns>
+        /// <exception cref="ArgumentException"></exception>
         public bool AddVehicle(T vehicle)
         {
             if (IsFull)
@@ -97,6 +127,12 @@ namespace Exercise_5___Garage
             return false;
         }
 
+        /// <summary>
+        /// Remove vehicle by registration number
+        /// </summary>
+        /// <param name="regNo">Reg no to remove/unpark</param>
+        /// <returns>True if vehicle removed ok, False not removed</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public bool RemoveVehicle(string regNo)
         {
             if (regNo == null)
@@ -113,6 +149,12 @@ namespace Exercise_5___Garage
             return false;
         }
 
+        /// <summary>
+        /// Remove/unpark Vehicle by a Vehicle object
+        /// </summary>
+        /// <param name="vehicle">The Vehicle to remove/unpark</param>
+        /// <returns>True if vehicle removed ok, False not removed</returns>
+        /// <exception cref="ArgumentNullException">Throws if the vehicle is null</exception>
         public bool RemoveVehicle(T vehicle)
         {
             if (vehicle == null)

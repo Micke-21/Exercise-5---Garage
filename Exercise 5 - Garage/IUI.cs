@@ -9,7 +9,7 @@ namespace Exercise_5___Garage
         string? GetStringInput(string message);
         void ListAllVehicles(IEnumerable<Vehicle> vehicles);
         void PrintVehicle(Vehicle vehicle);
-        void PrintString(string message);   
+        void PrintString(string message, bool clear = true);   
         void ShowMenu();
         void ShowStartMenu();
         void ChoseVehicleToAdd();
