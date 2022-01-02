@@ -13,7 +13,6 @@ namespace Exercise_5___Garage
 
     internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : Vehicle
     {
-        //private readonly Vehicle[] vehicles;
         private readonly T[] vehicles;
 
         public int Capacity { get;/* set;*/ }

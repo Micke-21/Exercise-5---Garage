@@ -70,7 +70,8 @@
                                 ui.ChoseVehicleToAdd();
                                 choice = ui.GetMenuChoice();
 
-                                if (gh.AddVehicle_2(ui, choice!))
+                                if (gh.AddVehicle(ui, choice!))
+
                                     ui.PrintString("Vehicle added.");
                                 else
                                     ui.PrintString("Vehcile not added");

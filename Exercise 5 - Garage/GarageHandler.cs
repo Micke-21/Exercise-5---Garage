@@ -119,7 +119,7 @@ namespace Exercise_5___Garage
         /// <param name="ui"></param>
         /// <param name="choice"></param>
         /// <returns></returns>
-        public bool AddVehicle(IUI ui, string choice)
+        public bool AddVehicle_old(IUI ui, string choice)
         {
             string? regNo = ui.GetStringInput("Enter Reg no: ");
             //ToDo Kolla om regnummer finns!?
@@ -231,7 +231,7 @@ namespace Exercise_5___Garage
             return vehicleadded;
         }
 
-        public bool AddVehicle_2(IUI ui, string choice)
+        public bool AddVehicle(IUI ui, string choice)
         {
             string? regNo = ui.GetStringInput("Enter Reg no: ");
             //ToDo Kolla om regnummer finns!?
@@ -252,12 +252,6 @@ namespace Exercise_5___Garage
             var noWheel = int.TryParse(ui.GetStringInput("Enter number of whells: "), out int iow) ? iow : 0;
 
             //ToDo GarageHandler: Jag har Scope problem vill egentligen inte skapa upp så här många objekt! 
-            //var newVehicle = new Vehicle(regNo);
-            //var newAirplane = new Airplane(regNo);
-            //var newBoat = new Boat(regNo);
-            //var newBus = new Bus(regNo);
-            //var newCar = new Car(regNo);
-            //var newMotorcycle = new Motorcycle(regNo);
 
             bool vehicleadded = false;
 
@@ -324,6 +318,8 @@ namespace Exercise_5___Garage
                 vehicle.NoOfWheel = noWheel;
 
                 vehicleadded = garage.AddVehicle((Vehicle)vehicle);
+                if (vehicleadded)
+                    ui.PrintVehicle((Vehicle)vehicle);
             }
 
             return vehicleadded;

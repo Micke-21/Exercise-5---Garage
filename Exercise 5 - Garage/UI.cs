@@ -80,7 +80,8 @@ namespace Exercise_5___Garage
             Console.WriteLine("Vehicle.\n");
             if (vehicle == null)
                 Console.WriteLine("No vehicle fond:");
-            Console.WriteLine($"{vehicle}");
+            else
+                Console.WriteLine($"{vehicle}");
         }
 
         public void PrintString(string message)
